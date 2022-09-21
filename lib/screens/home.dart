@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -18,6 +19,11 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(widget.title),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Colors.transparent,
+            statusBarBrightness: Brightness.light,
+            statusBarIconBrightness: Brightness.light,
+          ),
         ),
         body: Container(
           decoration: BoxDecoration(
