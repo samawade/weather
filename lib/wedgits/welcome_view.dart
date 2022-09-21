@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class WelcomeView extends StatelessWidget {
   const WelcomeView({
     Key? key,
@@ -17,7 +16,7 @@ class WelcomeView extends StatelessWidget {
             text: TextSpan(
               text: "Welcome to ",
               style: TextStyle(
-                  fontSize: 26, fontWeight: FontWeight.w200, height: 1.5),
+                  fontSize: 24, fontWeight: FontWeight.w300, height: 1.5),
               children: [
                 TextSpan(
                   text: "\n Weather App ⛅",

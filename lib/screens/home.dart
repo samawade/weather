@@ -47,13 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   "https://images.unsplash.com/photo-1431036101494-66a36de47def?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.7),
+                Colors.black.withOpacity(0.8),
                 BlendMode.darken,
               ),
             ),
           ),
-          child: WelcomeView(),
+          child: CurrentView(),
         ));
   }
 }
-
