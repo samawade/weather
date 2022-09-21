@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:weather/wedgits/wedgits.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -51,30 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: "Welcome to ",
-                    style: TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.w300, height: 1.5),
-                    children: [
-                      TextSpan(
-                        text: "\n Weather App ⛅",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+          child: WelcomeView(),
         ));
   }
 }
+
