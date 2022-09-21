@@ -19,6 +19,20 @@ class _HomeScreenState extends State<HomeScreen> {
           title: Text(widget.title),
           backgroundColor: Colors.transparent,
           elevation: 0,
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.pin_drop_outlined,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.search,
+              ),
+            ),
+          ],
           systemOverlayStyle: SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
             statusBarBrightness: Brightness.light,
