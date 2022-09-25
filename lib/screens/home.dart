@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:weather/wedgits/wedgits.dart';
+import 'package:weather_app/api/keys.dart';
+import 'package:weather_app/wedgits/wedgits.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:weather/weather.dart';
+import 'package:weather/weather.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -15,6 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Weather? weather;
+
+  WeatherFactory openWeather = WeatherFactory(api_key);
+
   Future<Position> getMyLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -41,10 +46,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return await Geolocator.getCurrentPosition();
   }
 
-  // Future<void> getWeather() async{
-  //   Position position = await getMyLocation();
-  //   WeatherFactory wf = WeatherFactory();
-  // }
+  Future<void> getWeather() async {
+    Position position = await getMyLocation();
+
+    weather = await openWeather.currentWeatherByLocation(
+        position.latitude, position.longitude);
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
           actions: [
             IconButton(
-              onPressed: () => getMyLocation(),
+              onPressed: () => getWeather(),
               icon: Icon(
                 Icons.pin_drop_outlined,
               ),
@@ -86,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          child: CurrentView(),
+          child: weather == null ? WelcomeView() : WeatherView(),
         ));
   }
 }
