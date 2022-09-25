@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/wedgits/wedgits.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+// import 'package:weather/weather.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -14,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void getMyLocation() async {
+  Future<Position> getMyLocation() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -36,10 +37,14 @@ class _HomeScreenState extends State<HomeScreen> {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print('Latitude: ${position.latitude}, longitude: ${position.longitude}');
+
+    return await Geolocator.getCurrentPosition();
   }
+
+  // Future<void> getWeather() async{
+  //   Position position = await getMyLocation();
+  //   WeatherFactory wf = WeatherFactory();
+  // }
 
   @override
   Widget build(BuildContext context) {
