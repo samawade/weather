@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:weather/wedgits/wedgits.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.title}) : super(key: key);
@@ -35,7 +36,8 @@ class _HomeScreenState extends State<HomeScreen> {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    Position position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high); 
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
     print('Latitude: ${position.latitude}, longitude: ${position.longitude}');
   }
 
@@ -70,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(
+              image: CachedNetworkImageProvider(
                   "https://images.unsplash.com/photo-1431036101494-66a36de47def?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
