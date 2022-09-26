@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:weather_app/api/keys.dart';
 import 'package:weather_app/wedgits/wedgits.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -16,7 +17,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Weather? weather;
+  bool _isLoading = false;
+  Weather? _weather;
 
   WeatherFactory openWeather = WeatherFactory(api_key);
 
@@ -47,12 +49,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> getWeather() async {
-    Position position = await getMyLocation();
+    setState(() {
+      _isLoading = !_isLoading;
+    });
 
-    weather = await openWeather.currentWeatherByLocation(
+    Position position = await getMyLocation();
+    _weather = await openWeather.currentWeatherByLocation(
         position.latitude, position.longitude);
 
-    setState(() {});
+    setState(() {
+      _isLoading = !_isLoading;
+    });
   }
 
   @override
@@ -83,19 +90,24 @@ class _HomeScreenState extends State<HomeScreen> {
             statusBarIconBrightness: Brightness.light,
           ),
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                  "https://images.unsplash.com/photo-1431036101494-66a36de47def?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"),
-              fit: BoxFit.cover,
-              colorFilter: ColorFilter.mode(
-                Colors.black.withOpacity(0.8),
-                BlendMode.darken,
+        body: ModalProgressHUD(
+          inAsyncCall: _isLoading,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(
+                    "https://images.unsplash.com/photo-1431036101494-66a36de47def?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                  Colors.black.withOpacity(0.8),
+                  BlendMode.darken,
+                ),
               ),
             ),
+            child: _weather == null
+                ? WelcomeView()
+                : WeatherView(weather: _weather!),
           ),
-          child: weather == null ? WelcomeView() : WeatherView(),
         ));
   }
 }
