@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CurrentView extends StatelessWidget {
-  const CurrentView({
+class WeatherView extends StatelessWidget {
+  const WeatherView({
     Key? key,
   }) : super(key: key);
 
@@ -14,7 +14,7 @@ class CurrentView extends StatelessWidget {
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-              text: "Mogadishu View, SO ",
+              text: "Mogadishu, SO ",
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w300,

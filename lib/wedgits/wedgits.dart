@@ -1,2 +1,2 @@
 export 'welcome_view.dart';
-export 'current_view.dart';
+export 'weather_view.dart';
