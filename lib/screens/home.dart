@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:weather_app/api/keys.dart';
+import 'package:weather_app/screens/search.dart';
 import 'package:weather_app/wedgits/wedgits.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:weather/weather.dart';
@@ -49,17 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> getWeather() async {
-    setState(() {
-      _isLoading = !_isLoading;
-    });
-
+        setState(() =>_isLoading = !_isLoading);
     Position position = await getMyLocation();
     _weather = await openWeather.currentWeatherByLocation(
         position.latitude, position.longitude);
-
-    setState(() {
-      _isLoading = !_isLoading;
-    });
+    setState(() =>_isLoading = !_isLoading);
   }
 
   @override
@@ -78,7 +73,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => SearchScreen(),
+                ),
+              ),
               icon: Icon(
                 Icons.search,
               ),

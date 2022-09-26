@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather/weather.dart';
+import 'package:weather_app/wedgits/wedgits.dart';
 
 class WeatherView extends StatelessWidget {
   final Weather weather;
@@ -26,10 +27,9 @@ class WeatherView extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text:
-                      "\n Updated: ${weather.date!.hour} : ${weather.date!.minute} ${weather.date!.timeZoneName}, ${weather.date}",
+                  text: "\n Updated: ${weather.date!.format}",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Colors.white70,
                   ),
@@ -50,8 +50,7 @@ class WeatherView extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text:
-                      "\n ${weather.weatherDescription} ${weather.weatherIcon}",
+                  text: "\n ${weather.weatherDescription}",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w300,
