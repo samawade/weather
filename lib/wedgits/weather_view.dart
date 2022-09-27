@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:weather/weather.dart';
+import 'package:weather_app/wedgits/wedgits.dart';
 
 class WeatherView extends StatelessWidget {
+  final Weather weather;
+
   const WeatherView({
     Key? key,
+    required this.weather,
   }) : super(key: key);
 
   @override
@@ -14,7 +19,7 @@ class WeatherView extends StatelessWidget {
           RichText(
             textAlign: TextAlign.center,
             text: TextSpan(
-              text: "Mogadishu, SO ",
+              text: "${weather.areaName}, ${weather.country} ",
               style: TextStyle(
                 fontSize: 26,
                 fontWeight: FontWeight.w300,
@@ -22,29 +27,30 @@ class WeatherView extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: "\n Updated: 14:59 EAT, 21/9/2022",
+                  text: "\n Updated: ${weather.date!.format}",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: FontWeight.w400,
                     color: Colors.white70,
                   ),
                 ),
                 TextSpan(
-                  text: "\n\n 27.0\u00B0",
+                  text:
+                      "\n\n ${weather.temperature!.celsius!.toStringAsFixed(1)}",
                   style: TextStyle(
                     fontSize: 46,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 TextSpan(
-                  text: "C",
+                  text: "\u00B0C",
                   style: TextStyle(
                     fontSize: 46,
                     fontWeight: FontWeight.w200,
                   ),
                 ),
                 TextSpan(
-                  text: "\n Clear SKY 🌤",
+                  text: "\n ${weather.weatherDescription}",
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w300,
