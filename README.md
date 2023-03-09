@@ -1,6 +1,6 @@
 # weather
 
-A new Flutter project.
+A Flutter weather app that shows weather information based on user's location.
 
 ## Getting Started
 
